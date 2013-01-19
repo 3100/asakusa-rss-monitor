@@ -1,10 +1,10 @@
 # asakusa-rss-monitor
 To post rss updates on AsakusaSatellite.
 
-# Install
+## Installation
     gem install asakusa-rss-monitor
 
-# Basic Usage
+## Basic Usage
     monitor = AsakusaRssMonitor.new({
       :check_file => 'last_time.txt',
       :rss_url => '<TARGET RSS>',
@@ -16,7 +16,7 @@ To post rss updates on AsakusaSatellite.
     })
     monitor.call
 
-# Post Message Customizing
+## Post Message Customizing
     class CustomMonitor < AsakusaRssMonitor::RssMonitor
       def initialize(config)
         super(config)
@@ -28,8 +28,8 @@ To post rss updates on AsakusaSatellite.
       end
     end
 
-# Monitoring RSS
+## Monitoring RSS
 To monitoring rss, you can use this script with cron.
 
-# Milestone
+## Milestone
 * spec..
