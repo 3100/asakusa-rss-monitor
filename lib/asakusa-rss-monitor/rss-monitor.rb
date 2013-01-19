@@ -20,7 +20,7 @@ module AsakusaRssMonitor
       latest_time= checker.latest
 
       rss = RssGetter.new(:url => @rss_url)
-      new_entries = rss.get_update latest_time
+      new_entries = rss.get_new_entries latest_time
       return unless new_entries.any?
 
       begin
