@@ -29,7 +29,32 @@ To post rss updates on AsakusaSatellite.
     end
 
 ## Monitoring RSS
-To monitoring rss, you can use this script with cron.
+To monitoring rss, you can use this script with cron or some nice libraries like
+[clockwork](https://github.com/tomykaira/clockwork).
 
+### Using clockwork
+    gem install clockwork
+    
+Then, create a file like clock.rb:
+
+    require 'clockwork'
+    require 'asakusa-rss-monitor'
+    include Clockwork
+    
+    handler do |job|
+      job.call
+    end
+    
+    monitor = AsakusaRssMonitor::Monitor.new({..})
+    another_monitor = AsakusaRssMonitor::Monitor.new({..}) # if you want to monitor another RSS.
+    every(5.minutes, monitor)
+    every(5.minutes, another_monitor)
+
+Run it with the clockwork binary:
+
+    clockwork clock.rb
+    
+If you want to daemonize it, see [Daemonization](https://github.com/tomykaira/clockwork#daemonization) page on clockwork.
+    
 ## Milestone
 * spec..
