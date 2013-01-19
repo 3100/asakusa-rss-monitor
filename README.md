@@ -33,9 +33,10 @@ To monitoring rss, you can use this script with cron or some nice libraries like
 [clockwork](https://github.com/tomykaira/clockwork).
 
 ### Using clockwork
+
     gem install clockwork
     
-Then, create a file like clock.rb:
+Create clock.rb:
 
     require 'clockwork'
     require 'asakusa-rss-monitor'
@@ -45,8 +46,8 @@ Then, create a file like clock.rb:
       job.call
     end
     
-    monitor = AsakusaRssMonitor::Monitor.new({..})
-    another_monitor = AsakusaRssMonitor::Monitor.new({..}) # if you want to monitor another RSS.
+    monitor = AsakusaRssMonitor::RssMonitor.new({..})
+    another_monitor = AsakusaRssMonitor::RssMonitor.new({..}) # if you want to monitor another RSS.
     every(5.minutes, monitor)
     every(5.minutes, another_monitor)
 
