@@ -8,17 +8,17 @@ module AsakusaRssMonitor
       @save = DateSave.new(:file_name => config[:file_name])
     end
 
-    def latest
-      @latest ||= @save.read
+    def last_time
+      @last_time ||= @save.read
     end
 
     def check(time)
-      time == @latest
+      time == @last_time
     end
 
     def update(time)
       @save.write time
-      @latest = time
+      @last_time = time
     end
   end
 end

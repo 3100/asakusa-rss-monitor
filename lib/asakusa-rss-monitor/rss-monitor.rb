@@ -11,26 +11,26 @@ module AsakusaRssMonitor
     def initialize(config)
       @check_file = config[:check_file]
       @rss_url = config[:rss_url]
-      @as_info = config[:as_info]
+      @bot_config = config[:bot_config]
     end
 
     def call
       checker = DateChecker.new(:file_name => @check_file)
-      latest_time= checker.latest
+      last_time= checker.last_time
 
       rss = RssGetter.new(:url => @rss_url)
-      new_articles = rss.get_new_articles latest_time
+      new_articles = rss.get_new_articles last_time
       return unless new_articles.any?
 
       begin
-        bot = PostBot.new(:as_info => @as_info)
+        bot = PostBot.new(:bot_config => @bot_config)
         new_articles.each do |entry|
           bot.post perform(entry)
         end
       rescue => exception
         p exception
+        return
       end
-
       # rss.get_new_entries returns articles by ascending order
       checker.update new_articles.last.date
     end
