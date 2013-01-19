@@ -8,7 +8,7 @@ module AsakusaRssMonitor
       @url = config[:url]
     end
 
-    def get_new_entries(time)
+    def get_new_articles(time)
       results = RSS::Parser.parse(@url)
       results.items.select{|item|
         item.date > time
