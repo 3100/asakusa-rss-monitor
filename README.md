@@ -5,21 +5,21 @@ To post rss updates on AsakusaSatellite.
     gem install asakusa-rss-monitor
 
 ## Basic Usage
-    monitor = AsakusaRssMonitor.new({
+    monitor = AsakusaRssMonitor.new(
       :check_file => 'last_time.txt',
       :rss_url => '<TARGET RSS>',
-      :bot_config => AsakusaRssMonitor::BotConfig.new({
+      :bot_config => AsakusaRssMonitor::BotConfig.new(
         :api_key => '<YOUR AS API KEY>',
         :entry_point => '<YOUR AS ENTRY POINT>', # cf. 'http://localhost:3000/api/v1'
         :room_id => '<ROOM ID>'
-      })
-    })
+      )
+    )
     monitor.call
 
 ## Post Message Customizing
     class CustomMonitor < AsakusaRssMonitor::RssMonitor
       def initialize(config)
-        super(config)
+        super
       end
 
       # override this.
@@ -46,8 +46,8 @@ Create clock.rb:
       job.call
     end
 
-    monitor = AsakusaRssMonitor::RssMonitor.new({..})
-    another_monitor = AsakusaRssMonitor::RssMonitor.new({..}) # if you want to monitor another RSS.
+    monitor = AsakusaRssMonitor::RssMonitor.new(..)
+    another_monitor = AsakusaRssMonitor::RssMonitor.new(..) # if you want to monitor another RSS.
     every(5.minutes, monitor)
     every(5.minutes, another_monitor)
 
