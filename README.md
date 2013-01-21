@@ -55,7 +55,13 @@ Run it with the clockwork binary:
 
     clockwork clock.rb
 
-If you want to daemonize it, see [Daemonization](https://github.com/tomykaira/clockwork#daemonization) page on clockwork.
+If you want to daemonize it, see [Daemonization](https://github.com/tomykaira/clockwork#daemonization) page on clockwork. When you use daemons gem, be sure to set absolute path to :check_file:
+
+    dir = File.expand_path(File.dir(__FILE__))
+    monitor = AsakusaRssMonitor.new({
+      :check_file => "#{dir}/last_time.txt",
+    
+    ..
 
 ## Milestone
 * spec..
